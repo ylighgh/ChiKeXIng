@@ -2,6 +2,8 @@
 
 ## 使用
 
+`pip install -r requirements.txt`
+
 ## 需求分析
 
 1. **登录/注册**
