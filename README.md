@@ -4,6 +4,8 @@
 
 `pip install -r requirements.txt`
 
+`hello world`
+
 ## 需求分析
 
 1. **登录/注册**
