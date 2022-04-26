@@ -4,6 +4,8 @@
 
 `pip install -r requirements.txt  -i https://mirrors.aliyun.com/pypi/simple/`
 
+`hello world`
+
 ## 需求分析
 
 1. **登录/注册**
