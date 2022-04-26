@@ -2,7 +2,7 @@
 
 ## 使用
 
-`pip install `
+`pip install -r requirements.txt`
 
 ## 需求分析
 
@@ -45,3 +45,6 @@
 
     - 准备环境（MySQL 之类的）验证 MySQL 是否安装成功 - 连接一下 ✔
     - 初始化后端项目，引入框架（整合框架）✔
+### 04-24
+1. BootStrap组件使用
+2. GitHub项目提交流程
