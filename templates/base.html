@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+  <script src="{{ url_for("static",filename="js/bootstrap.bundle.min.js") }}"></script>
+  <script src="{{ url_for("static",filename="js/bootstrap.min.js") }}"></script>
+  <script src="{{ url_for("static",filename="js/popper.min.js") }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/my.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+{#nav-bar#}
+<header class="p-3 bg-dark text-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-3 text-white-50">首页</a></li>
+        <li><a href="#" class="nav-link px-3 text-white-50">发布</a></li>
+        <li><a href="#" class="nav-link px-3 text-white-50">探索</a></li>
+      </ul>
+
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+        <input type="search" class="form-control form-control-dark" placeholder="搜索..." aria-label="Search">
+      </form>
+
+      <div class="text-end">
+        <button type="button" class="btn btn-outline-light me-2">登陆</button>
+        <button type="button" class="btn btn-warning">注册</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+{#定义文章内容#}
+  {% block banner %}
+
+  {% endblock %}
+<div class="container">
+
+  {% block body %}
+
+  {% endblock %}
+</div>
+
+{#footer#}
+<div class="container">
+  <footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">首页</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">关于我们</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">联系我们</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">加入我们</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">隐私政策</a></li>
+    </ul>
+    <p class="text-center text-muted">© 2021 Company, Inc</p>
+  </footer>
+</div>
+</body>
+</html>

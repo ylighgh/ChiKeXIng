@@ -2,9 +2,8 @@
 
 ## 使用
 
-`pip install -r requirements.txt`
+`pip install -r requirements.txt  -i https://mirrors.aliyun.com/pypi/simple/`
 
-`hello world`
 
 ## 需求分析
 
