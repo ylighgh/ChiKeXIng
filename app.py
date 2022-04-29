@@ -2,7 +2,7 @@ from flask import Flask, session, g ,render_template
 from flask_migrate import Migrate
 import config
 from exts import db, mail
-
+from happy_python import *
 # 数据库配置
 app = Flask(__name__)
 app.config.from_object(config)
