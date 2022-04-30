@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+  吃客行--登陆
+{% endblock %}
+
+{% block body %}
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <form>
+          <!-- Email input -->
+          <div class="form-outline mt-5">
+            <input type="email" id="form2Example1" class="form-control"/>
+            <label class="form-label" for="form2Example1">邮箱地址</label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mt-4">
+            <input type="password" id="form2Example2" class="form-control"/>
+            <label class="form-label" for="form2Example2">密码</label>
+          </div>
+
+          <!-- 2 column grid layout for inline styling -->
+          <div class="row mt-4">
+            <div class="col d-flex justify-content-center">
+              <!-- Checkbox -->
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked/>
+                <label class="form-check-label" for="form2Example31"> 记住密码 </label>
+              </div>
+            </div>
+
+            <div class="col">
+              <!-- Simple link -->
+              <a href="#!">忘记密码?</a>
+            </div>
+          </div>
+
+          <!-- Submit button -->
+          <button type="button" class="btn btn-primary btn-block mt-4">登陆</button>
+
+          <!-- Register buttons -->
+          <div class="text-center mt-4">
+            <p>还没有帐号? <a href="{{ url_for("ckx.register") }}">点我注册吧</a></p>
+
+          </div>
+        </form>
+      </div>
+      <div class="col"></div>
+    </div>
+
+  </div>
+
+{% endblock %}
