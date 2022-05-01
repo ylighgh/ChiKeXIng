@@ -2,7 +2,7 @@ from flask import Flask, session, g, render_template
 from flask_migrate import Migrate
 import config
 from exts import db, mail
-from blueprints import ckx_bp
+from blueprints import ckx_bp, user_bp
 from happy_python import *
 
 # 数据库配置
@@ -14,6 +14,7 @@ migrate = Migrate(app, db)
 
 # 绑定蓝图
 app.register_blueprint(ckx_bp)
+app.register_blueprint(user_bp)
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    app.run()
