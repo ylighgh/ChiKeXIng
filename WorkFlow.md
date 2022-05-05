@@ -8,7 +8,7 @@
 - 主页面
   - 首页(index.html) ✔
   - 登陆页面(login.html) ✔
-  - 注册页面(register.html)
+  - 注册页面(register.html) 
   - 美食详情(recipeDetail.html)
 - 用户中心页面
   - 分享美食(postRecipe.html)

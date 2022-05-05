@@ -22,3 +22,8 @@ def login():
 @bp.route('/register')
 def register():
     return render_template("register.html")
+
+
+@bp.route('/recipeDetail')
+def recipeDetail():
+    return render_template("recipeDetail.html")
