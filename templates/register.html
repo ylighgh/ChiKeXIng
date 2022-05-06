@@ -1,63 +1,58 @@
 {% extends "base.html" %}
 
 {% block title %}
-吃客行--注册
+  吃客行--注册
+{% endblock %}
+{% block head %}
+  <style>
+      /* Set a background image by replacing the URL below */
+      body {
+          background: url({{ url_for('static',filename="images/bg/1.webp") }}) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          background-size: cover;
+          -o-background-size: cover;
+      }
+  </style>
+
 {% endblock %}
 {% block body %}
-  
 
-    <div class="all_in" style="margin-left: 700px;margin-top: 100px;">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col" style="background-color: #ffffff">
+        <div class="all_in">
+          <div class="form-floating mt-5" style="width: 400px;margin:0 auto;margin-top: 20px">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">请输入邮箱地址</label>
+          </div>
 
-    <div class="input-group flex-nowrap" style="width: 400px;margin:0 auto" >
-          <span class="input-group-text" id="addon-wrapping">输入你的昵称</span>
-          <input type="text" class="form-control"  placeholder="昵称" aria-label="Username" aria-describedby="addon-wrapping" >
-    </div>
-    <div class="sex" style="margin-left: 10px;margin-top: 20px" >
-    <span>你的性别:</span>
+          <div class="form-floating mt-5" style="width: 400px;margin:0 auto">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">请输入你的密码</label>
+          </div>
 
- <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-  <label class="form-check-label" for="inlineRadio1">男</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-  <label class="form-check-label" for="inlineRadio2">女</label>
-</div>
-    </div>
-    <div class="birth" style="margin-left: 10px;margin-top: 20px">
-    <form action="time">
-    生日: <input type="date" name="bday">
-    </form>
-    </div>
-
-    <div class="form-floating mb-3" style="width: 400px;margin:0 auto;margin-top: 20px" >
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">请输入邮箱地址：</label>
-    </div>
-
-    <div class="form-floating" style="width: 400px;margin:0 auto" >
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword">请输入你的密码：</label>
-    </div>
-
-    <div class="form-floating" style="width: 400px;  margin:0 auto;margin-top: 20px" >
-          <input type="password" class="form-control" id="floatingPassword2" placeholder="Password">
-          <label for="floatingPassword">请再次输入你的密码：</label>
-    </div>
+          <div class="form-floating mt-5" style="width: 400px;  margin:0 auto;margin-top: 20px">
+            <input type="password" class="form-control" id="floatingPassword2" placeholder="Password">
+            <label for="floatingPassword">请再次输入你的密码</label>
+          </div>
 
 
-
-
-
-    <div class="form-check" style="margin-left: 10px; margin-top: 20px">
-            <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" >
-            <label class="form-check-label" for="disabledFieldsetCheck" style="display: inline-block;width: 373px">
-               我已阅读并接受以下条款：《吃客行服务条款》《吃客行隐私政策》《吃客行支付用户服务协议》
+          <div class="form-check mt-5">
+            <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck">
+            <label class="form-check-label" for="disabledFieldsetCheck">
+              我已阅读并接受以下条款：《吃客行服务条款》
             </label>
-    </div>
+          </div>
 
-    <div class="col-auto" style="margin-left: 10px; margin-top: 20px">
-    <button type="submit" class="btn btn-primary mb-3">注册</button>
-  </div>
+          <div class="col-auto mt-5">
+            <button type="submit" class="btn-block btn btn-primary mb-3">注册</button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+
 {% endblock %}
