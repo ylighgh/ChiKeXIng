@@ -1,9 +1,16 @@
 {% extends "userbase.html" %}
 
 {% block title %}
-个人中心
+  个人中心
+{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/postRecipe.css') }}">
+  <script rel=" " src="{{ url_for('static',filename='js/postRecipe.js') }}"></script>
+{% endblock %}
+{% block postRecipe %}
+  active
 {% endblock %}
 
-{% block postRecipe %}
-active
+{% block body %}
+  
 {% endblock %}

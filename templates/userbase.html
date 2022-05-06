@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <title>{% block title %}{% endblock %}</title>
-
+  {% block head %}{% endblock %}
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -32,13 +32,13 @@
     </div>
     <ul class="list-unstyled components">
       <li class=" {% block postRecipe %}{% endblock %}">
-        <a href="{{ url_for('user.postRecipe') }}"  aria-expanded="false">分享美食</a>
+        <a href="{{ url_for('user.postRecipe') }}" aria-expanded="false">分享美食</a>
       </li>
       <li class=" {% block userRecipe %}{% endblock %}">
-        <a href="{{ url_for('user.userRecipe') }}"  aria-expanded="false">我的分享</a>
+        <a href="{{ url_for('user.userRecipe') }}" aria-expanded="false">我的分享</a>
       </li>
       <li class=" {% block userInfo %}{% endblock %}">
-        <a href="{{ url_for('user.userInfo') }}"  aria-expanded="false">账户信息</a>
+        <a href="{{ url_for('user.userInfo') }}" aria-expanded="false">账户信息</a>
       </li>
       <li class=" {% block userSetting %}{% endblock %}">
         <a href="{{ url_for('user.userSetting') }}" aria-expanded="false">帐号设置</a>
