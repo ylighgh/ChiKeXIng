@@ -43,6 +43,9 @@
       <li class=" {% block userSetting %}{% endblock %}">
         <a href="{{ url_for('user.userSetting') }}" aria-expanded="false">帐号设置</a>
       </li>
+      <li class=" ">
+        <a href="{{ url_for('ckx.index') }}" aria-expanded="false">回到首页</a>
+      </li>
     </ul>
 
 
@@ -56,14 +59,13 @@
 
         <button type="button" id="sidebarCollapse" class="btn btn-info">
           <i class="fas fa-align-left"></i>
-          <span>Menu</span>
+          <span>菜单</span>
         </button>
         <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
           <i class="fas fa-align-justify"></i>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         </div>
       </div>

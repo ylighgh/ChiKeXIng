@@ -1,7 +1,7 @@
 {% extends "userbase.html" %}
 
 {% block title %}
-个人中心
+  个人中心
 {% endblock %}
 
 {% block head %}
@@ -10,9 +10,83 @@
   </style>
 {% endblock %}
 {% block userRecipe %}
-active
+  active
 {% endblock %}
 
 {% block body %}
-
+  <div class="container">
+    <table class="table align-middle mt-5 bg-white">
+      <thead class="bg-light">
+      <tr>
+        <td></td>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>
+          <div class="input-group">
+            <input style="width: 100px" type="search" class="form-control rounded" placeholder="Search"
+                   aria-label="Search"
+                   aria-describedby="search-addon"/>
+            <button type="button" class="btn btn-outline-primary">search</button>
+          </div>
+        </th>
+      </tr>
+      <tr>
+        <th>ID</th>
+        <th>菜名</th>
+        <th>简介</th>
+        <th>发表日期</th>
+        <th>其他</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+              <p class="fw-bold mb-1">10001</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">红烧茄子</p>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">xxxxxxxxxx</p>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">2022-12-12</p>
+        </td>
+        <td>
+          <button type="button" class="badge badge-light rounded-pill" style="margin-right:30px;margin-top: 5px">编辑
+          </button>
+          <button type="button" class="badge badge-danger rounded-pill" style="margin-top: 5px">删除</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+              <p class="fw-bold mb-1">10001</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">红烧茄子</p>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">xxxxxxxxxx</p>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">2022-12-12</p>
+        </td>
+        <td>
+          <button type="button" class="badge badge-light rounded-pill" style="margin-right:30px;margin-top: 5px">编辑
+          </button>
+          <button type="button" class="badge badge-danger rounded-pill" style="margin-top: 5px">删除</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 {% endblock %}
