@@ -21,6 +21,30 @@
 
 ## 后端
 
+### 数据库
 
+1. 用户表(user)
+```
+id
+user_name 
+user_email
+user_phone
+user_address
+user_signature
+user_introduction
+user_id (外键)
+```
+2. 用户配置(user_setting)
+```
+id
+user_id
+user_email
+user_password
+```
+3. 美食表
+```
+id
+food_name
+food_
+```
 ## 工作进度
-
