@@ -1,5 +1,5 @@
 # 数据库的配置变量
-HOSTNAME = 'aliyun'
+HOSTNAME = '39.99.62.76'
 PORT = '3306'
 DATABASE = 'chikexing'
 USERNAME = 'root'

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, g, request, redirect, url_for, flash
 # from .decorators import login_required
 # from .forms import QuestionFrom, AnswerFrom
-# from models import QuestionModel, AnswerModel
+from models import User_setting
 from exts import db
 
 # from sqlalchemy import or_
