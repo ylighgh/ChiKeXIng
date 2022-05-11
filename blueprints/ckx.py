@@ -1,10 +1,8 @@
 from flask import Blueprint, render_template, session, g, request, redirect, url_for, flash
 # from .decorators import login_required
-from .forms import UserModel, RegisterForm,LoginForm
+from .forms import UserModel, RegisterForm, LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from exts import db
-
-# from sqlalchemy import or_
 
 bp = Blueprint("ckx", __name__, url_prefix="/")
 
@@ -49,6 +47,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         return redirect(url_for("ckx.login"))
+
 
 @bp.route("/logout")
 def logout():

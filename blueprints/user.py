@@ -8,7 +8,6 @@ import string
 import random
 from exts import db, mail
 
-# from sqlalchemy import or_
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
@@ -50,12 +49,6 @@ def userInfo():
             USER.introduction = form.introduction.data
             db.session.commit()
             return render_template("userInfo.html")
-            # email = form.email.data
-            # phone = form.phone.data
-            # address = form.address.data
-            # signature = form.signature.data
-            # introduction = form.introduction.data
-
 
 @bp.route('/userSetting')
 @login_required
