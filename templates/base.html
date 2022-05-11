@@ -56,12 +56,27 @@
 
     <!-- Right elements -->
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a class="nav-link" href="#">发布</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for("ckx.login") }}">登陆</a>
-      </li>
+      {#      <li class="nav-item">#}
+      {#        <a class="nav-link" href="#">发布</a>#}
+      {#      </li>#}
+      {#      <li class="nav-item">#}
+      {#        <a class="nav-link" href="{{ url_for("ckx.login") }}">登陆</a>#}
+      {#      </li>#}
+      {% if user %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('user.home') }}">{{ user.username }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('ckx.logout') }}">退出登录</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="#">发布</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('ckx.login') }}">登陆</a>
+        </li>
+      {% endif %}
 
     </ul>
     <!-- Container wrapper -->
