@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template,session, g, request, redirect, url_for, flash
+from flask import Blueprint, render_template, session, g, request, redirect, url_for, flash
 # from .decorators import login_required
-from .forms import LoginForm
-from models import User_setting
+from .forms import UserModel, RegisterForm,LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from exts import db
 
@@ -24,7 +23,7 @@ def login():
         if form.validate():
             email = form.email.data
             password = form.password.data
-            user = User_setting.query.filter_by(email=email).first()
+            user = UserModel.query.filter_by(email=email).first()
             if user and check_password_hash(user.password, password):
                 session['user_id'] = user.id
                 return redirect("/")
@@ -32,13 +31,30 @@ def login():
                 flash("邮箱和密码不匹配！")
                 return redirect(url_for("ckx.login"))
         else:
-            flash("邮箱或密码格式错误！")
+            flash("邮箱和密码不匹配！")
             return redirect(url_for("ckx.login"))
 
 
-@bp.route('/register')
+@bp.route("/register", methods=['GET', 'POST'])
 def register():
-    return render_template("register.html")
+    if request.method == 'GET':
+        return render_template("register.html")
+    else:
+        form = RegisterForm(request.form)
+        email = form.email.data
+        username = form.username.data
+        password = form.password.data
+        hash_password = generate_password_hash(password)
+        user = UserModel(email=email, username=username, password=hash_password)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for("ckx.login"))
+
+@bp.route("/logout")
+def logout():
+    # 清除session中所有的数据
+    session.clear()
+    return redirect(url_for('ckx.login'))
 
 
 @bp.route('/recipeDetail')
