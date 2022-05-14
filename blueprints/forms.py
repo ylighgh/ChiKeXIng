@@ -1,4 +1,5 @@
 import wtforms
+from wtforms import FileField, SubmitField
 from wtforms.validators import length, email, EqualTo
 from models import EmailCaptchaModel, UserModel
 
@@ -33,8 +34,26 @@ class RegisterForm(wtforms.Form):
 # 个人资料验证
 class UserInfoFrom(wtforms.Form):
     username = wtforms.StringField(validators=[length(min=3, max=20)])
-    email = wtforms.StringField(validators=[email()])
     phone = wtforms.StringField(validators=[length(min=11, max=11)])
     address = wtforms.StringField(validators=[length(max=20)])
     signature = wtforms.StringField(validators=[length(max=200)])
     introduction = wtforms.StringField(validators=[length(max=200)])
+
+
+# 修改密码设置
+class UserSettingForm(wtforms.Form):
+    oldPassword = wtforms.StringField(validators=[length(min=6, max=20)])
+    newPassword = wtforms.StringField(validators=[length(min=6, max=20)])
+    newPassword_confirm = wtforms.StringField(validators=[EqualTo("newPassword")])
+
+
+# 发表菜品
+class PostRecipeForm(wtforms.Form):
+    recipe_name = wtforms.StringField(validators=[length(min=1, max=20)])
+    recipe_introduction = wtforms.StringField(validators=[length(min=1, max=20)])
+    recipe_steps = wtforms.StringField(validators=[length(min=1)])
+
+
+# 删除菜品记录
+class DeleteRecipeForm(wtforms.Form):
+    recipe_id = wtforms.StringField(validators=[length(min=1, max=20)])

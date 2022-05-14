@@ -5,3 +5,6 @@ happy_python
 flask_mail
 pymysql
 wtforms
+email_validator
+flask_uploads
+flask-avatars
