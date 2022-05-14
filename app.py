@@ -4,12 +4,12 @@ import config
 from exts import db, mail
 from blueprints import ckx_bp, user_bp
 from models import UserModel
-import hashlib
+from flask_cors import *
 
 # 数据库配置
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 app.config.from_object(config)
-
 db.init_app(app)
 mail.init_app(app)
 migrate = Migrate(app, db)

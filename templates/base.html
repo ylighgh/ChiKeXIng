@@ -71,7 +71,7 @@
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">发布</a>
+                    <a class="nav-link" href="{{ url_for('user.postRecipe') }}">发布</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('ckx.login') }}">登陆</a>

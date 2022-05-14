@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, g, request, session, redirect, url
 from flask_mail import Message
 from sqlalchemy import or_
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_paginate import Pagination, get_page_parameter
 from models import EmailCaptchaModel, UserModel, RecipeModel
 from decorators import login_required
 from .forms import UserInfoFrom, UserSettingForm, PostRecipeForm, DeleteRecipeForm
@@ -39,12 +40,29 @@ def postRecipe():
             return redirect(url_for("user.postRecipe"))
 
 
-@bp.route('/userRecipe')
+@bp.route('/userRecipe/')
 @login_required
 def userRecipe():
+    page = request.args.get('page', type=int, default=1)
     user_id = session.get("user_id")
-    recipes = RecipeModel.query.filter(RecipeModel.author_id == user_id)
+    paginate = RecipeModel.query.filter(RecipeModel.author_id == user_id).paginate(page=int(page), per_page=5)
+    return render_template("userRecipe.html", recipes=paginate)
+
+
+# 搜索记录
+@bp.route("/search")
+def search():
+    # /search?q=xxx
+    page = request.args.get('page', type=int, default=1)
+    q = request.args.get("q")
+    user_id = session.get("user_id")
+    # filter_by：直接使用字段的名称
+    # filter：使用模型.字段名称
+    recipes = RecipeModel.query.filter(or_(RecipeModel.recipe_name.contains(q), RecipeModel.id.contains(q)),
+                                       RecipeModel.author_id == user_id).order_by(
+        db.text("-post_time")).paginate(page=int(page), per_page=5)
     return render_template("userRecipe.html", recipes=recipes)
+
 
 
 @bp.route('/userInfo', methods=['GET', 'POST'])
@@ -137,15 +155,4 @@ def delete_recipe():
     return redirect(url_for('user.userRecipe'))
 
 
-# 搜索记录
-@bp.route("/search")
-def search():
-    # /search?q=xxx
-    q = request.args.get("q")
-    user_id = session.get("user_id")
-    # filter_by：直接使用字段的名称
-    # filter：使用模型.字段名称
-    recipes = RecipeModel.query.filter(or_(RecipeModel.recipe_name.contains(q), RecipeModel.id.contains(q)),
-                                       RecipeModel.author_id == user_id).order_by(
-        db.text("-post_time"))
-    return render_template("userRecipe.html", recipes=recipes)
+
