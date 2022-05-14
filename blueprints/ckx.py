@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, session, g, request, redirect, url
 # from .decorators import login_required
 from .forms import UserModel, RegisterForm, LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
+from models import RecipeModel
 from exts import db
 
 bp = Blueprint("ckx", __name__, url_prefix="/")
@@ -9,7 +10,8 @@ bp = Blueprint("ckx", __name__, url_prefix="/")
 
 @bp.route('/')
 def index():
-    return render_template("index.html")
+    recipes = RecipeModel.query.order_by(db.text("-post_time")).limit(6)
+    return render_template("index.html",recipes=recipes)
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -56,6 +58,7 @@ def logout():
     return redirect(url_for('ckx.login'))
 
 
-@bp.route('/recipeDetail')
-def recipeDetail():
-    return render_template("recipeDetail.html")
+@bp.route('/recipeDetail/<int:recipe_id>')
+def recipeDetail(recipe_id):
+    recipe = RecipeModel.query.get(RecipeModel.recipe_id)
+    return render_template("recipeDetail.html", recipe=recipe)

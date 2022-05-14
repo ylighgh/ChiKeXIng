@@ -1,92 +1,90 @@
 {% extends "userbase.html" %}
 
 {% block title %}
-  个人中心
+    个人中心
 {% endblock %}
 
 {% block head %}
-  <style>
-
-  </style>
+    <script src="{{ url_for('static',filename='jquery/jquery.3.6.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/userRecipe.js') }}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 {% endblock %}
 {% block userRecipe %}
-  active
+    active
 {% endblock %}
 
 {% block body %}
-  <div class="container">
-    <table class="table align-middle mt-5 bg-white">
-      <thead class="bg-light">
-      <tr>
-        <td></td>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>
-          <div class="input-group">
-            <input style="width: 100px" type="search" class="form-control rounded" placeholder="Search"
-                   aria-label="Search"
-                   aria-describedby="search-addon"/>
-            <button type="button" class="btn btn-outline-primary">search</button>
-          </div>
-        </th>
-      </tr>
-      <tr>
-        <th>ID</th>
-        <th>菜名</th>
-        <th>简介</th>
-        <th>发表日期</th>
-        <th>其他</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>
-          <div class="d-flex align-items-center">
-            <div class="ms-3">
-              <p class="fw-bold mb-1">10001</p>
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
             </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">红烧茄子</p>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">xxxxxxxxxx</p>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">2022-12-12</p>
-        </td>
-        <td>
-          <button type="button" class="badge badge-light rounded-pill" style="margin-right:30px;margin-top: 5px">编辑
-          </button>
-          <button type="button" class="badge badge-danger rounded-pill" style="margin-top: 5px">删除</button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="d-flex align-items-center">
-            <div class="ms-3">
-              <p class="fw-bold mb-1">10001</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">红烧茄子</p>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">xxxxxxxxxx</p>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">2022-12-12</p>
-        </td>
-        <td>
-          <button type="button" class="badge badge-light rounded-pill" style="margin-right:30px;margin-top: 5px">编辑
-          </button>
-          <button type="button" class="badge badge-danger rounded-pill" style="margin-top: 5px">删除</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+        {% endfor %}
+        <table class="table align-middle mt-5 bg-white">
+            <thead class="bg-light">
+            <tr>
+                <td></td>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th width="250px">
+                    <div class="input-group">
+                        <form action="{{ url_for('user.search') }}" method="GET">
+                            <div class="input-group">
+                            <input name="q" type="search" class="form-control rounded" placeholder="Search"
+                                   aria-label="Search"
+                                   aria-describedby="search-addon"/>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-success ">
+                                    <i class="bi-eye"></i> 搜索
+                                </button>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>ID</th>
+                <th>菜名</th>
+                <th>简介</th>
+                <th>发表日期</th>
+                <th>其他</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for recipe in recipes %}
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="ms-3">
+                                <a href="#"><p class="fw-bold mb-1">{{ recipe.id }}</p></a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">{{ recipe.recipe_name }}</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">{{ recipe.recipe_introduction }}</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">{{ recipe.post_time }}</p>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('user.delete_recipe') }}" method="POST">
+                            <button type="button" class="btn btn-warning ">
+                                <i class="bi-pencil"></i> 编辑
+                            </button>
+                            <button id="delete-btn" type="submit" class="btn btn-danger ">
+                                <i class="bi-trash"></i> 删除
+                            </button>
+                            <input name="recipe_id" hidden type="text" value="{{ recipe.id }}">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

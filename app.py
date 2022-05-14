@@ -4,14 +4,16 @@ import config
 from exts import db, mail
 from blueprints import ckx_bp, user_bp
 from models import UserModel
-from happy_python import *
+import hashlib
 
 # 数据库配置
 app = Flask(__name__)
 app.config.from_object(config)
+
 db.init_app(app)
 mail.init_app(app)
 migrate = Migrate(app, db)
+
 
 # 绑定蓝图
 app.register_blueprint(ckx_bp)
