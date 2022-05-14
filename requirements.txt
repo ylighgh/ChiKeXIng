@@ -8,3 +8,5 @@ wtforms
 email_validator
 flask_uploads
 flask-avatars
+flask_paginate
+flask-cors
