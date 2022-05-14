@@ -91,7 +91,7 @@
             <ul class="pagination justify-content-center">
                 <li {% if not recipes.has_prev %}class="disabled {% endif %}page-item ">
                     <a class="page-link"
-                       href="{{ url_for('user.userRecipe') }}?page={{ recipes.prev_num }} }}">Previous</a>
+                       href="{{ url_for('user.userRecipe') }}?page={{ recipes.prev_num }}">Previous</a>
                 </li>
                 {% for num in range(1,recipes.pages+1) %}
                     <li {% if num == recipes.page %} class="active {% endif %}page-item "><a class="page-link"
