@@ -32,5 +32,6 @@ class RecipeModel(db.Model):
     recipe_steps = db.Column(db.String(200), nullable=True)
     post_time = db.Column(db.DateTime, default=datetime.now)
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    avatar = db.Column(db.String(200),nullable=True)
 
     author = db.relationship("UserModel", backref="recipe")
