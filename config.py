@@ -1,4 +1,6 @@
 # 数据库的配置变量
+import os
+
 HOSTNAME = '39.99.62.76'
 PORT = '3306'
 DATABASE = 'chikexing'
@@ -21,3 +23,7 @@ MAIL_DEBUG = True
 MAIL_USERNAME = '475254161@qq.com'
 MAIL_PASSWORD = 'xyozqcchfaqibhdb'
 MAIL_DEFAULT_SENDER = '475254161@qq.com'
+
+# 文件上传
+BASE_DIR = os.path.dirname(__name__)
+UPLOAD_DIR = os.path.join(BASE_DIR, 'static/images/upload/avatar')

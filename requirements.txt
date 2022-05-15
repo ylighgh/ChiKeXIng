@@ -10,3 +10,4 @@ flask_uploads
 flask-avatars
 flask_paginate
 flask-cors
+flask_wtf

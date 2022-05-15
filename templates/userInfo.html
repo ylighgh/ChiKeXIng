@@ -67,7 +67,7 @@
     </style>
     <!-- Font Awesome -->
     <link
-            href="{{ url_for('static',filename='css/all.min.css')}}"
+            href="{{ url_for('static',filename='css/all.min.css') }}"
             rel="stylesheet"
     />
     <!-- Google Fonts -->
@@ -77,7 +77,7 @@
     />
     <!-- MDB -->
     <link
-            href="{{ url_for('static',filename='css/mdb.min.css')}}"
+            href="{{ url_for('static',filename='css/mdb.min.css') }}"
             rel="stylesheet"
     />
 {% endblock %}
@@ -89,7 +89,7 @@
     <!-- MDB -->
     <script
             type="text/javascript"
-            src="{{ url_for('static',filename='js/mdb.min.v2.js')}}"
+            src="{{ url_for('static',filename='js/mdb.min.v2.js') }}"
     ></script>
     <div class="container">
         <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
@@ -124,9 +124,15 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="{{ url_for("static",filename="images/bg/header-0.jpg") }}"
-                                     class="rounded-circle"
-                                     width="150" height="150">
+                                <img src="
+                                        {% if not user.avatar %}{{ url_for("static",filename="images/upload/avatar/default.png") }}{% else %}{{ url_for("static",filename=user.avatar) }}{% endif %}"
+                                     class="rounded-circle" style="width: 150px;"
+                                     alt="Avatar">
+                                <form action="{{ url_for('user.avatarUpload') }}" method="post" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">请上传png、jpg图片格式</label>
+                                <input name="avatar" type="file" class="form-control" id="customFile" alt=""/>
+                                    <button type="submit" class="btn btn-block btn-dark mt-3">修改头像</button>
+                                </form>
                                 <div class="mt-3">
                                     <h4>{{ user.username }}</h4>
                                     <p class="text-muted font-size-sm">{{ user.signature }}</p>
