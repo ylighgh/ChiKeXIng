@@ -1,3 +1,4 @@
+import os.path
 from datetime import datetime
 from flask import Blueprint, render_template, g, request, session, redirect, url_for, flash, jsonify
 from flask_mail import Message
@@ -6,10 +7,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_paginate import Pagination, get_page_parameter
 from models import EmailCaptchaModel, UserModel, RecipeModel
 from decorators import login_required
-from .forms import UserInfoFrom, UserSettingForm, PostRecipeForm, DeleteRecipeForm
+from .forms import UserInfoFrom, UserSettingForm, PostRecipeForm, DeleteRecipeForm, UserAvatarForm
 import string
 import random
 from exts import db, mail
+from config import UPLOAD_DIR
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
@@ -62,7 +64,6 @@ def search():
                                        RecipeModel.author_id == user_id).order_by(
         db.text("-post_time")).paginate(page=int(page), per_page=5)
     return render_template("userRecipe.html", recipes=recipes)
-
 
 
 @bp.route('/userInfo', methods=['GET', 'POST'])
@@ -147,7 +148,6 @@ def get_captcha():
 def delete_recipe():
     form = DeleteRecipeForm(request.form)
     recipe_id = form.recipe_id.data
-    print(recipe_id)
     RecipeModel.query.filter(RecipeModel.id == recipe_id).delete()
     db.session.commit()
     db.session.close()
@@ -155,4 +155,20 @@ def delete_recipe():
     return redirect(url_for('user.userRecipe'))
 
 
+@bp.route("/avatarUpload", methods=['POST'])
+def avatarUpload():
+    form = UserAvatarForm(request.files)
 
+    avatar = request.files.get('avatar')
+    # 保存到本地文件夹
+    avatar_url = os.path.join(UPLOAD_DIR, avatar.filename)
+    print(avatar_url)
+    avatar.save(avatar_url)
+    # 保存到数据库
+    user_id = session.get("user_id")
+    USER = UserModel.query.filter(UserModel.id == user_id).first()
+    USER.avatar = '/images/upload/avatar/' + avatar.filename
+    db.session.commit()
+
+    print(USER.avatar)
+    return render_template("userInfo.html")

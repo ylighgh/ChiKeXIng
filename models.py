@@ -21,6 +21,7 @@ class UserModel(db.Model):
     address = db.Column(db.String(100), nullable=True)
     signature = db.Column(db.String(100), nullable=True)
     introduction = db.Column(db.String(100), nullable=True)
+    avatar = db.Column(db.String(200),nullable=True)
 
 
 class RecipeModel(db.Model):

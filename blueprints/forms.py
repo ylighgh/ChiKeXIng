@@ -1,7 +1,8 @@
 import wtforms
-from wtforms import FileField, SubmitField
+from wtforms import FileField
 from wtforms.validators import length, email, EqualTo
 from models import EmailCaptchaModel, UserModel
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 
 # 登录表单验证
@@ -57,3 +58,10 @@ class PostRecipeForm(wtforms.Form):
 # 删除菜品记录
 class DeleteRecipeForm(wtforms.Form):
     recipe_id = wtforms.StringField(validators=[length(min=1, max=20)])
+
+
+# 个人头像
+class UserAvatarForm(wtforms.Form):
+    avatar = FileField('image', validators=[
+        FileAllowed(['jpg', 'png'], 'Images only!')
+    ])
