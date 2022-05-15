@@ -57,7 +57,10 @@
                 {% for recipe in recipes %}
                     <div class="col">
                         <div class="card shadow-sm">
-                            <img src="https://source.unsplash.com/200x200/?food" class="img-rounded" height="250"
+                            <img src="
+                                    {% if not recipe.avatar %}{{ url_for("static",filename="images/upload/recipe/default.png") }}{% else %}{{ url_for("static",filename=recipe.avatar) }}{% endif %}"
+                                 class="
+                                 img-rounded" height="250"
                                  width="413.45" style="border-radius: 10px;">
                             <div class="card-body">
                                 <p class="card-text"><b>{{ recipe.recipe_name }}</b></p>

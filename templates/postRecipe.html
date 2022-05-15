@@ -19,7 +19,7 @@
             </div>
 
             <div class="col-8">
-                <form action="{{ url_for("user.postRecipe") }}" method="POST">
+                <form action="{{ url_for("user.postRecipe") }}" method="POST" enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-default">菜名</span>
                         <input name="recipe_name" type="text" class="form-control" aria-label="Sizing example input"
@@ -36,6 +36,10 @@
                         <textarea name="recipe_steps" cols="20" type="text" class="form-control"
                                   aria-label="Sizing example input"
                                   aria-describedby="inputGroup-sizing-default"></textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">封面图片</span>
+                        <input name="avatar" type="file" class="form-control"/>
                     </div>
 
                     {% for message in get_flashed_messages() %}

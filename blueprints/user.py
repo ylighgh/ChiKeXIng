@@ -4,7 +4,6 @@ from flask import Blueprint, render_template, g, request, session, redirect, url
 from flask_mail import Message
 from sqlalchemy import or_
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_paginate import Pagination, get_page_parameter
 from models import EmailCaptchaModel, UserModel, RecipeModel
 from decorators import login_required
 from .forms import UserInfoFrom, UserSettingForm, PostRecipeForm, DeleteRecipeForm, UserAvatarForm
@@ -28,18 +27,46 @@ def postRecipe():
     if request.method == 'GET':
         return render_template("postRecipe.html")
     else:
-        form = PostRecipeForm(request.form)
+        form = PostRecipeForm(request.form, request.files)
         if form.validate():
             user_id = session.get("user_id")
             recipe_name = form.recipe_name.data
             recipe_introduction = form.recipe_introduction.data
             recipe_steps = form.recipe_steps.data
+            avatar = request.files.get('avatar')
+            # 保存到本地文件夹
+            avatar_url = os.path.join(UPLOAD_DIR + 'recipe', avatar.filename)
+            print(avatar_url)
+            avatar.save(avatar_url)
+
+            # 保存到数据库
+            avatar_data = '/images/upload/recipe/' + avatar.filename
+
             recipe = RecipeModel(recipe_name=recipe_name, recipe_introduction=recipe_introduction,
-                                 recipe_steps=recipe_steps, author_id=user_id)
+                                 recipe_steps=recipe_steps, author_id=user_id, avatar=avatar_data)
+
             db.session.add(recipe)
             db.session.commit()
             flash("发布成功")
             return redirect(url_for("user.postRecipe"))
+
+
+"""
+    form = UserAvatarForm(request.files)
+
+    avatar = request.files.get('avatar')
+    # 保存到本地文件夹
+    avatar_url = os.path.join(UPLOAD_DIR+'avatar', avatar.filename)
+    print(avatar_url)
+    avatar.save(avatar_url)
+    # 保存到数据库
+    user_id = session.get("user_id")
+    USER = UserModel.query.filter(UserModel.id == user_id).first()
+    USER.avatar = '/images/upload/avatar/' + avatar.filename
+    db.session.commit()
+
+    print(USER.avatar)
+"""
 
 
 @bp.route('/userRecipe/')
@@ -47,7 +74,8 @@ def postRecipe():
 def userRecipe():
     page = request.args.get('page', type=int, default=1)
     user_id = session.get("user_id")
-    paginate = RecipeModel.query.filter(RecipeModel.author_id == user_id).paginate(page=int(page), per_page=5)
+    paginate = RecipeModel.query.filter(RecipeModel.author_id == user_id).order_by(
+        db.text("-post_time")).paginate(page=int(page), per_page=5)
     return render_template("userRecipe.html", recipes=paginate)
 
 
@@ -161,7 +189,7 @@ def avatarUpload():
 
     avatar = request.files.get('avatar')
     # 保存到本地文件夹
-    avatar_url = os.path.join(UPLOAD_DIR, avatar.filename)
+    avatar_url = os.path.join(UPLOAD_DIR + 'avatar', avatar.filename)
     print(avatar_url)
     avatar.save(avatar_url)
     # 保存到数据库

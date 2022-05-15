@@ -26,4 +26,4 @@ MAIL_DEFAULT_SENDER = '475254161@qq.com'
 
 # 文件上传
 BASE_DIR = os.path.dirname(__name__)
-UPLOAD_DIR = os.path.join(BASE_DIR, 'static/images/upload/avatar')
+UPLOAD_DIR = os.path.join(BASE_DIR, 'static/images/upload/')
