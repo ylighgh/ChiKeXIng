@@ -66,16 +66,25 @@
                         <p class="fw-normal mb-1">{{ recipe.recipe_name }}</p>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1">{{ recipe.recipe_introduction }}</p>
+                        <p class="fw-normal mb-1" style="
+                        width:350px;
+                        height:25px;
+                        /*word-break:break-all;*/
+                        white-space: nowrap;/*强制在一行显示*/
+                        text-overflow:ellipsis;/*设置超出内容显示...*/
+                        overflow: hidden;/*一定不能少 超出的内容进行隐藏*/"
+                        >{{ recipe.recipe_introduction }}</p>
                     </td>
                     <td>
                         <p class="fw-normal mb-1">{{ recipe.post_time }}</p>
                     </td>
                     <td>
                         <form action="{{ url_for('user.delete_recipe') }}" method="POST">
-                            <button type="button" class="btn btn-warning ">
-                                <i class="bi-pencil"></i> 编辑
-                            </button>
+                            <a href="{{ url_for('user.editRecipe') }}?recipe_id={{ recipe.id }}"">
+                                <button type="button" type="button" class="btn btn-warning ">
+                                    <i class="bi-pencil"></i> 编辑
+                                </button>
+                            </a>
                             <button id="delete-btn" type="submit" class="btn btn-danger ">
                                 <i class="bi-trash"></i> 删除
                             </button>

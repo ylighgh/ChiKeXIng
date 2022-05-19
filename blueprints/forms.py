@@ -51,11 +51,12 @@ class UserSettingForm(wtforms.Form):
 # 发表菜品
 class PostRecipeForm(wtforms.Form):
     recipe_name = wtforms.StringField(validators=[length(min=1, max=20)])
-    recipe_introduction = wtforms.StringField(validators=[length(min=1, max=20)])
+    recipe_introduction = wtforms.StringField(validators=[length(min=1, max=100)])
     recipe_steps = wtforms.StringField(validators=[length(min=1)])
     avatar = FileField('image', validators=[
         FileAllowed(['jpg', 'png'], 'Images only!')
     ])
+
 
 # 删除菜品记录
 class DeleteRecipeForm(wtforms.Form):
@@ -67,3 +68,18 @@ class UserAvatarForm(wtforms.Form):
     avatar = FileField('image', validators=[
         FileAllowed(['jpg', 'png'], 'Images only!')
     ])
+
+
+# 修改菜品
+class EditRecipeForm(wtforms.Form):
+    recipe_id = wtforms.StringField(validators=[length(min=1, max=20)])
+    recipe_name = wtforms.StringField()
+    recipe_introduction = wtforms.StringField()
+    recipe_steps = wtforms.StringField()
+    avatar = FileField('image', validators=[
+        FileAllowed(['jpg', 'png'], 'Images only!')
+    ])
+
+
+class CommentForm(wtforms.Form):
+    content = wtforms.StringField(validators=[length(min=1)])

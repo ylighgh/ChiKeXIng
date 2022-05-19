@@ -4,6 +4,21 @@
     吃客行--首页
 {% endblock %}
 
+{% block head %}
+    <style>
+        /*单行文本隐藏*/
+        .container p{
+
+            width:350px;
+            height:25px;
+            /*word-break:break-all;*/
+            white-space: nowrap;/*强制在一行显示*/
+            text-overflow:ellipsis;/*设置超出内容显示...*/
+            overflow: hidden;/*一定不能少 超出的内容进行隐藏*/
+        }
+    </style>
+{% endblock %}
+
 {% block banner %}
     <div id="carouselExampleCaptions" class="carousel slide mt-0" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -53,26 +68,30 @@
 {% block body %}
     <div class="album py-5 bg-light">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
                 {% for recipe in recipes %}
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="
-                                    {% if not recipe.avatar %}{{ url_for("static",filename="images/upload/recipe/default.png") }}{% else %}{{ url_for("static",filename=recipe.avatar) }}{% endif %}"
-                                 class="
+                    <a href="{{ url_for('ckx.recipeDetail') }}?recipe_id={{ recipe.id }}"
+                       style="text-decoration: none;color: #050702">
+                        <div class="col">
+                            <div class="d-flex card shadow-sm">
+                                <img src="
+                                        {% if not recipe.avatar %}{{ url_for("static",filename="images/upload/recipe/default.png") }}{% else %}{{ url_for("static",filename=recipe.avatar) }}{% endif %}"
+                                     class="
                                  img-rounded" height="250"
-                                 width="413.45" style="border-radius: 10px;">
-                            <div class="card-body">
-                                <p class="card-text"><b>{{ recipe.recipe_name }}</b></p>
-                                <p class="card-text">{{ recipe.recipe_introduction }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">{{ recipe.post_time }}</small>
+                                     width="413.45" style="border-radius: 10px;">
+                                <div class="card-body ">
+                                    <p class="card-text"><b>{{ recipe.recipe_name }}</b></p>
+                                    <p class="card-text">{{ recipe.recipe_introduction }}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">{{ recipe.post_time }}</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 {% endfor %}
             </div>
+
         </div>
     </div>
 {% endblock %}
