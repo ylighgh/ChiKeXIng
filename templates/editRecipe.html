@@ -1,69 +1,70 @@
 {% extends "userbase.html" %}
 
 {% block title %}
-    个人中心
+  个人中心
 {% endblock %}
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/postRecipe.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/postRecipe.css') }}">
 {% endblock %}
 {% block body %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-1">
+  <div class="container">
+    <div class="row">
+      <div class="col-1">
+      </div>
+      {% for recipe in recipes %}
+        <div class="col-8">
+          <form action="{{ url_for("user.editRecipe") }}" method="POST" enctype="multipart/form-data">
+            <div class="input-group mb-3" style="visibility: hidden">
+              <span class="input-group-text" id="inputGroup-sizing-default">编号</span>
+              <input name="recipe_id" type="text" class="form-control" aria-label="Sizing example input"
+                     aria-describedby="inputGroup-sizing-default" value="{{ recipe.id }}">
             </div>
-            {% for recipe in recipes %}
-                <div class="col-8">
-                    <form action="{{ url_for("user.editRecipe") }}" method="POST" enctype="multipart/form-data">
-                        <div class="input-group mb-3" style="visibility: hidden">
-                            <span class="input-group-text" id="inputGroup-sizing-default">编号</span>
-                            <input name="recipe_id" type="text" class="form-control" aria-label="Sizing example input"
-                                   aria-describedby="inputGroup-sizing-default" value="{{ recipe.id }}">
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default">菜名</span>
-                            <input name="recipe_name" type="text" class="form-control" aria-label="Sizing example input"
-                                   aria-describedby="inputGroup-sizing-default" value="{{ recipe.recipe_name }}">
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default">简介</span>
-                            <input name="recipe_introduction" type="text" class="form-control"
-                                   aria-label="Sizing example input"
-                                   aria-describedby="inputGroup-sizing-default"
-                                   value="{{ recipe.recipe_introduction }}">
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default">做法</span>
-                            <textarea name="recipe_steps" cols="20" type="text" class="form-control"
-                                      aria-label="Sizing example input"
-                                      aria-describedby="inputGroup-sizing-default"
-                                      placeholder="{{ recipe.recipe_steps }}"></textarea>
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default">封面图片</span>
-                            <img src="
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default">菜名</span>
+              <input name="recipe_name" type="text" class="form-control" aria-label="Sizing example input"
+                     aria-describedby="inputGroup-sizing-default" value="{{ recipe.recipe_name }}">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default">简介</span>
+              <input name="recipe_introduction" type="text" class="form-control"
+                     aria-label="Sizing example input"
+                     aria-describedby="inputGroup-sizing-default"
+                     value="{{ recipe.recipe_introduction }}">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default">做法</span>
+              <textarea name="recipe_steps" cols="20" type="text" class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
+                        placeholder="{{ recipe.recipe_steps }}"></textarea>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default">封面图片</span>
+              <img src="
 
-                                    {% if not recipe.avatar %}{{ url_for("static",filename="images/upload/recipe/default.png") }}{% else %}{{ url_for("static",filename=recipe.avatar) }}{% endif %}"
-                                 class="
+
+                      {% if not recipe.avatar %}{{ url_for("static",filename="images/upload/recipe/default.png") }}{% else %}{{ url_for("static",filename=recipe.avatar) }}{% endif %}"
+                   class="
                                  img-rounded" height="250"
-                                 style="border-radius: 10px;">
-                            <input name="avatar" type="file" class="form-control"/>
-                        </div>
-
-                        {% for message in get_flashed_messages() %}
-                            <div class="alert alert-success" role="alert">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-
-                        <div class="col-auto mt-5">
-                            <button type="submit" class="btn-block btn btn-primary mb-3">保存修改</button>
-                        </div>
-                    </form>
-                </div>
-            {% endfor %}
-            <div class="col">
+                   style="border-radius: 10px;">
+              <input name="avatar" type="file" class="form-control"/>
             </div>
+
+            {% for message in get_flashed_messages() %}
+              <div class="alert alert-success" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+
+            <div class="col-auto mt-5">
+              <button type="submit" class="btn-block btn btn-primary mb-3">保存修改</button>
+            </div>
+          </form>
         </div>
+      {% endfor %}
+      <div class="col">
+      </div>
     </div>
+  </div>
 {% endblock %}

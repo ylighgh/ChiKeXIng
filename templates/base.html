@@ -1,82 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
-    {% block head %}{% endblock %}
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+  {% block head %}{% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
 {#nav-bar#}
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Container wrapper -->
-    <div class="container-fluid">
-        <!-- Toggle button -->
-        <button
-                class="navbar-toggler"
-                type="button"
-                data-mdb-toggle="collapse"
-                data-mdb-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-        >
-            <i class="fas fa-bars"></i>
-        </button>
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
 
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Navbar brand -->
-            <a class="navbar-brand mt-2 mt-lg-0" href="{{ url_for("ckx.index") }}">
-                <img
-                        src="https://www.chikexing.com/images/log.png"
-                        height="35"
-                        alt="MDB Logo"
-                        loading="lazy"
-                />
-            </a>
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for("ckx.index") }}">首页</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for("ckx.explore") }}">探索</a>
-                </li>
-            </ul>
-            <!-- Left links -->
-        </div>
-        <!-- Collapsible wrapper -->
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="{{ url_for("ckx.index") }}">
+        <img
+                src="https://www.chikexing.com/images/log.png"
+                height="35"
+                alt="MDB Logo"
+                loading="lazy"
+        />
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for("ckx.index") }}">首页</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for("ckx.explore") }}">探索</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
 
 
-        <!-- Right elements -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            {% if user %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('user.home') }}"><img style="
+    <!-- Right elements -->
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      {% if user %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('user.home') }}"><img style="
     height:30px;
     width: 30px;
     float: left;
     border-radius: 50%;" src="
-                            {% if not user.avatar %}{{ url_for("static",filename="images/upload/avatar/default.png") }}{% else %}{{ url_for('static',filename=user.avatar) }} {% endif %}">{{ user.username }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('ckx.logout') }}">退出登录</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('user.postRecipe') }}">发布</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('ckx.login') }}">登陆</a>
-                </li>
-            {% endif %}
 
-        </ul>
-        <!-- Container wrapper -->
-    </div>
+                  {% if not user.avatar %}{{ url_for("static",filename="images/upload/avatar/default.png") }}{% else %}{{ url_for('static',filename=user.avatar) }} {% endif %}">{{ user.username }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('ckx.logout') }}">退出登录</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('user.postRecipe') }}">发布</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('ckx.login') }}">登陆</a>
+        </li>
+      {% endif %}
+
+    </ul>
+    <!-- Container wrapper -->
+  </div>
 </nav>
 <!-- Navbar -->
 
@@ -86,18 +87,18 @@
 
 {% endblock %}
 <div class="container">
-    {% block body %}
-    {% endblock %}
+  {% block body %}
+  {% endblock %}
 </div>
 
 <footer class="bg-light text-center text-lg-start mt-auto">
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2022 Copyright:
-        <a class="text-dark" href="#">ChikeXing.com</a>
-    </div>
-    <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+    <a class="text-dark" href="#">ChikeXing.com</a>
+  </div>
+  <!-- Copyright -->
 
-    <!-- Copyright -->
+  <!-- Copyright -->
 </footer>
 
 <!-- JavaScript Bundle with Popper -->

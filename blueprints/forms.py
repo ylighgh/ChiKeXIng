@@ -50,8 +50,8 @@ class UserSettingForm(wtforms.Form):
 
 # 发表菜品
 class PostRecipeForm(wtforms.Form):
-    recipe_name = wtforms.StringField(validators=[length(min=1, max=20)])
-    recipe_introduction = wtforms.StringField(validators=[length(min=1, max=100)])
+    recipe_name = wtforms.StringField(validators=[length(min=1)])
+    recipe_introduction = wtforms.StringField(validators=[length(min=1,)])
     recipe_steps = wtforms.StringField(validators=[length(min=1)])
     avatar = FileField('image', validators=[
         FileAllowed(['jpg', 'png'], 'Images only!')

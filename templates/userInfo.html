@@ -1,288 +1,290 @@
 {% extends "userbase.html" %}
 
 {% block title %}
-    个人中心
+  个人中心
 {% endblock %}
 {% block head %}
-    <style>
-        body {
-            margin-top: 20px;
-            color: #1a202c;
-            text-align: left;
-            background-color: #e2e8f0;
-        }
+  <style>
+      body {
+          margin-top: 20px;
+          color: #1a202c;
+          text-align: left;
+          background-color: #e2e8f0;
+      }
 
-        .main-body {
-            padding: 15px;
-        }
+      .main-body {
+          padding: 15px;
+      }
 
-        .card {
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-        }
+      .card {
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+      }
 
-        .card {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            word-wrap: break-word;
-            background-color: #fff;
-            background-clip: border-box;
-            border: 0 solid rgba(0, 0, 0, .125);
-            border-radius: .25rem;
-        }
+      .card {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+          word-wrap: break-word;
+          background-color: #fff;
+          background-clip: border-box;
+          border: 0 solid rgba(0, 0, 0, .125);
+          border-radius: .25rem;
+      }
 
-        .card-body {
-            flex: 1 1 auto;
-            min-height: 1px;
-            padding: 1rem;
-        }
+      .card-body {
+          flex: 1 1 auto;
+          min-height: 1px;
+          padding: 1rem;
+      }
 
-        .gutters-sm {
-            margin-right: -8px;
-            margin-left: -8px;
-        }
+      .gutters-sm {
+          margin-right: -8px;
+          margin-left: -8px;
+      }
 
-        .gutters-sm > .col, .gutters-sm > [class*=col-] {
-            padding-right: 8px;
-            padding-left: 8px;
-        }
+      .gutters-sm > .col, .gutters-sm > [class*=col-] {
+          padding-right: 8px;
+          padding-left: 8px;
+      }
 
-        .mb-3, .my-3 {
-            margin-bottom: 1rem !important;
-        }
+      .mb-3, .my-3 {
+          margin-bottom: 1rem !important;
+      }
 
-        .bg-gray-300 {
-            background-color: #e2e8f0;
-        }
+      .bg-gray-300 {
+          background-color: #e2e8f0;
+      }
 
-        .h-100 {
-            height: 100% !important;
-        }
+      .h-100 {
+          height: 100% !important;
+      }
 
-        .shadow-none {
-            box-shadow: none !important;
-        }
+      .shadow-none {
+          box-shadow: none !important;
+      }
 
-    </style>
-    <!-- Font Awesome -->
-    <link
-            href="{{ url_for('static',filename='css/all.min.css') }}"
-            rel="stylesheet"
-    />
-    <!-- MDB -->
-    <link
-            href="{{ url_for('static',filename='css/mdb.min.css') }}"
-            rel="stylesheet"
-    />
+  </style>
+  <!-- Font Awesome -->
+  <link
+          href="{{ url_for('static',filename='css/all.min.css') }}"
+          rel="stylesheet"
+  />
+  <!-- MDB -->
+  <link
+          href="{{ url_for('static',filename='css/mdb.min.css') }}"
+          rel="stylesheet"
+  />
 {% endblock %}
 {% block userInfo %}
-    active
+  active
 {% endblock %}
 
 {% block body %}
-    <!-- MDB -->
-    <script
-            type="text/javascript"
-            src="{{ url_for('static',filename='js/mdb.min.v2.js') }}"
-    ></script>
-    <div class="container">
-        <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a
-                        class="nav-link active"
-                        id="tab-login"
-                        data-mdb-toggle="pill"
-                        href="#pills-login"
-                        role="tab"
-                        aria-controls="pills-login"
-                        aria-selected="true"
-                >个人资料</a
-                >
-            </li>
-            <li class="nav-item" role="presentation">
-                <a
-                        class="nav-link"
-                        id="tab-register"
-                        data-mdb-toggle="pill"
-                        href="#pills-register"
-                        role="tab"
-                        aria-controls="pills-register"
-                        aria-selected="false"
-                >修改资料</a
-                >
-            </li>
-        </ul>
-        <div class="main-body">
-            <div class="row gutters-sm">
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center">
-                                <img src="
+  <!-- MDB -->
+  <script
+          type="text/javascript"
+          src="{{ url_for('static',filename='js/mdb.min.v2.js') }}"
+  ></script>
+  <div class="container">
+    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a
+                class="nav-link active"
+                id="tab-login"
+                data-mdb-toggle="pill"
+                href="#pills-login"
+                role="tab"
+                aria-controls="pills-login"
+                aria-selected="true"
+        >个人资料</a
+        >
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+                class="nav-link"
+                id="tab-register"
+                data-mdb-toggle="pill"
+                href="#pills-register"
+                role="tab"
+                aria-controls="pills-register"
+                aria-selected="false"
+        >修改资料</a
+        >
+      </li>
+    </ul>
+    <div class="main-body">
+      <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img src="
 
-                                        {% if not user.avatar %}{{ url_for("static",filename="images/upload/avatar/default.png") }}{% else %}{{ url_for("static",filename=user.avatar) }}{% endif %}"
-                                     class="rounded-circle" style="width: 150px;"
-                                     alt="Avatar">
-                                <form action="{{ url_for('user.avatarUpload') }}" method="post"
-                                      enctype="multipart/form-data">
-                                    <label class="form-label" for="customFile">请上传png、jpg图片格式</label>
-                                    <input name="avatar" type="file" class="form-control" id="customFile" alt=""/>
-                                    <button type="submit" class="btn btn-block btn-dark mt-3">修改头像</button>
-                                </form>
-                                <div class="mt-3">
-                                    <h4>{{ user.username }}</h4>
-                                    <p class="text-muted font-size-sm">{{ user.signature }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mt-3">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none"
-                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round"
-                                         class="feather feather-github mr-2 icon-inline">
-                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                                    </svg>
-                                    菜谱
-                                </h6>
-                                <span class="text-secondary">{{ count }}</span>
-                            </li>
-                        </ul>
-                    </div>
+
+
+                        {% if not user.avatar %}{{ url_for("static",filename="images/upload/avatar/default.png") }}{% else %}{{ url_for("static",filename=user.avatar) }}{% endif %}"
+                     class="rounded-circle" style="width: 150px;"
+                     alt="Avatar">
+                <form action="{{ url_for('user.avatarUpload') }}" method="post"
+                      enctype="multipart/form-data">
+                  <label class="form-label" for="customFile">请上传png、jpg图片格式</label>
+                  <input name="avatar" type="file" class="form-control" id="customFile" alt=""/>
+                  <button type="submit" class="btn btn-block btn-dark mt-3">修改头像</button>
+                </form>
+                <div class="mt-3">
+                  <h4>{{ user.username }}</h4>
+                  <p class="text-muted font-size-sm">{{ user.signature }}</p>
                 </div>
-                <div class="tab-content d-flex col-lg-8">
-                    <div class="flex-fill tab-pane  fade show active " id="pills-login" aria-labelledby="tab-login"
-                         role="tabpanel">
-                        <div class="card mb-4 ">
-                            <div class="card-body">
-                                <div class="row" style="height: 50px">
-                                    <div class="col-sm-3">
-                                        <h6 class="mt-2">昵称</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        {{ user.username }}
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row" style="height: 50px">
-                                    <div class="col-sm-3">
-                                        <h6 class="mt-2">邮箱</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        {{ user.email }}
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row" style="height: 50px">
-                                    <div class="col-sm-3">
-                                        <h6 class="mt-2">电话号码</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        {{ user.phone }}
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row" style="height: 50px">
-                                    <div class="col-sm-3">
-                                        <h6 class="mt-2">地址</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        {{ user.address }}
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row" style="height: 50px">
-                                    <div class="col-sm-3">
-                                        <h6 class="mt-2">个性签名</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        {{ user.signature }}
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row" style="height: 83.5px">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">个人简介</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        {{ user.introduction }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mt-3">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <h6 class="mb-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                       fill="none"
+                       stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                       stroke-linejoin="round"
+                       class="feather feather-github mr-2 icon-inline">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                  菜谱
+                </h6>
+                <span class="text-secondary">{{ count }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tab-content d-flex col-lg-8">
+          <div class="flex-fill tab-pane  fade show active " id="pills-login" aria-labelledby="tab-login"
+               role="tabpanel">
+            <div class="card mb-4 ">
+              <div class="card-body">
+                <div class="row" style="height: 50px">
+                  <div class="col-sm-3">
+                    <h6 class="mt-2">昵称</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{ user.username }}
+                  </div>
+                </div>
+                <hr>
+                <div class="row" style="height: 50px">
+                  <div class="col-sm-3">
+                    <h6 class="mt-2">邮箱</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{ user.email }}
+                  </div>
+                </div>
+                <hr>
+                <div class="row" style="height: 50px">
+                  <div class="col-sm-3">
+                    <h6 class="mt-2">电话号码</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{ user.phone }}
+                  </div>
+                </div>
+                <hr>
+                <div class="row" style="height: 50px">
+                  <div class="col-sm-3">
+                    <h6 class="mt-2">地址</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{ user.address }}
+                  </div>
+                </div>
+                <hr>
+                <div class="row" style="height: 50px">
+                  <div class="col-sm-3">
+                    <h6 class="mt-2">个性签名</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{ user.signature }}
+                  </div>
+                </div>
+                <hr>
+                <div class="row" style="height: 83.5px">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">个人简介</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{ user.introduction }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex-fill  tab-pane  fade" id="pills-register" role="tabpanel"
+               aria-labelledby="tab-register">
+            <div class="card mb-3 flex-fill">
+              <div class="card-body">
+                <form action="{{ url_for("user.userInfo") }}" method="POST">
+                  <div class="row mt-2">
+                    <div class="col-sm-3">
+                      <h6 class="mt-2">昵称</h6>
                     </div>
-                    <div class="flex-fill  tab-pane  fade" id="pills-register" role="tabpanel"
-                         aria-labelledby="tab-register">
-                        <div class="card mb-3 flex-fill">
-                            <div class="card-body">
-                                <form action="{{ url_for("user.userInfo") }}" method="POST">
-                                    <div class="row mt-2">
-                                        <div class="col-sm-3">
-                                            <h6 class="mt-2">昵称</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input required="required" value="{{ user.username }}" type="text"
-                                                   class="form-control" name="username">
-                                        </div>
-                                    </div>
-                                    <hr>
+                    <div class="col-sm-9 text-secondary">
+                      <input required="required" value="{{ user.username }}" type="text"
+                             class="form-control" name="username">
+                    </div>
+                  </div>
+                  <hr>
 
-                                    <div class="row mt-2">
-                                        <div class="col-sm-3">
-                                            <h6 class="mt-2">电话号码</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" required="required" value="{{ user.phone }}"
-                                                   class="form-control" name="phone">
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row mt-2">
-                                        <div class="col-sm-3">
-                                            <h6 class="mt-2">地址</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" value="{{ user.address }}" class="form-control"
-                                                   name="address">
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row mt-2">
-                                        <div class="col-sm-3">
-                                            <h6 class="mt-2">个性签名</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" value="{{ user.signature }}" class="form-control"
-                                                   name="signature">
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row mt-2">
-                                        <div class="col-sm-3">
-                                            <h6 class="mt-2">个人简介</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" style="height: 130px">
+                  <div class="row mt-2">
+                    <div class="col-sm-3">
+                      <h6 class="mt-2">电话号码</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <input type="text" required="required" value="{{ user.phone }}"
+                             class="form-control" name="phone">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row mt-2">
+                    <div class="col-sm-3">
+                      <h6 class="mt-2">地址</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <input type="text" value="{{ user.address }}" class="form-control"
+                             name="address">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row mt-2">
+                    <div class="col-sm-3">
+                      <h6 class="mt-2">个性签名</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <input type="text" value="{{ user.signature }}" class="form-control"
+                             name="signature">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row mt-2">
+                    <div class="col-sm-3">
+                      <h6 class="mt-2">个人简介</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" style="height: 130px">
                                             <textarea type="text" rows="5"
                                                       class="form-control" name="introduction"></textarea>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row mt-1" style="height: 49px">
-                                        <div class="col-sm-12 mt-4">
-                                            <button type="submit" class="btn btn-block btn-info ">保存修改</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
                     </div>
-                </div>
+                  </div>
+                  <hr>
+                  <div class="row mt-1" style="height: 49px">
+                    <div class="col-sm-12 mt-4">
+                      <button type="submit" class="btn btn-block btn-info ">保存修改</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 {% endblock %}

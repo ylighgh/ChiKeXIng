@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, g, request, session, redirect, url
 from flask_mail import Message
 from sqlalchemy import or_
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import EmailCaptchaModel, UserModel, RecipeModel
+from models import EmailCaptchaModel, UserModel, RecipeModel, CommentModel
 from decorators import login_required
 from .forms import UserInfoFrom, UserSettingForm, PostRecipeForm, DeleteRecipeForm, UserAvatarForm, EditRecipeForm
 import string
@@ -159,9 +159,10 @@ def get_captcha():
 def delete_recipe():
     form = DeleteRecipeForm(request.form)
     recipe_id = form.recipe_id.data
+    CommentModel.query.filter(CommentModel.recipe_id == recipe_id).delete()
+    db.session.commit()
     RecipeModel.query.filter(RecipeModel.id == recipe_id).delete()
     db.session.commit()
-    db.session.close()
     flash(f'成功删除编号为{recipe_id}的记录')
     return redirect(url_for('user.userRecipe'))
 

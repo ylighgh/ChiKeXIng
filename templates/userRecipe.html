@@ -1,116 +1,116 @@
 {% extends "userbase.html" %}
 
 {% block title %}
-    个人中心
+  个人中心
 {% endblock %}
 
 {% block head %}
-    <script src="{{ url_for('static',filename='jquery/jquery.3.6.min.js') }}"></script>
-    <script src="{{ url_for('static',filename='js/userRecipe.js') }}"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+  <script src="{{ url_for('static',filename='jquery/jquery.3.6.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/userRecipe.js') }}"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 {% endblock %}
 {% block userRecipe %}
-    active
+  active
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        {% for message in get_flashed_messages() %}
-            <div class="alert alert-success" role="alert">
-                {{ message }}
+  <div class="container">
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-success" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+    <table class="table align-middle mt-5 bg-white">
+      <thead class="bg-light">
+      <tr>
+        <td></td>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>
+          <div class="input-group">
+            <form action="{{ url_for('user.search') }}" method="GET">
+              <div class="input-group">
+                <input name="q" type="search" class="form-control rounded" placeholder="Search"
+                       aria-label="Search"
+                       aria-describedby="search-addon"/>
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-success ">
+                    <i class="bi-eye"></i> 搜索
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </th>
+      </tr>
+      <tr>
+        <th>ID</th>
+        <th>菜名</th>
+        <th>简介</th>
+        <th>发表日期</th>
+        <th>操作事项</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for recipe in recipes.items %}
+        <tr>
+          <td>
+            <div class="d-flex align-items-center">
+              <div class="ms-3">
+                <a href="#"><p class="fw-bold mb-1">{{ recipe.id }}</p></a>
+              </div>
             </div>
-        {% endfor %}
-        <table class="table align-middle mt-5 bg-white">
-            <thead class="bg-light">
-            <tr>
-                <td></td>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th width="250px">
-                    <div class="input-group">
-                        <form action="{{ url_for('user.search') }}" method="GET">
-                            <div class="input-group">
-                                <input name="q" type="search" class="form-control rounded" placeholder="Search"
-                                       aria-label="Search"
-                                       aria-describedby="search-addon"/>
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-success ">
-                                        <i class="bi-eye"></i> 搜索
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <th>ID</th>
-                <th>菜名</th>
-                <th>简介</th>
-                <th>发表日期</th>
-                <th>操作事项</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for recipe in recipes.items %}
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="ms-3">
-                                <a href="#"><p class="fw-bold mb-1">{{ recipe.id }}</p></a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">{{ recipe.recipe_name }}</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1" style="
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{ recipe.recipe_name }}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1" style="
                         width:350px;
                         height:25px;
                         /*word-break:break-all;*/
                         white-space: nowrap;/*强制在一行显示*/
                         text-overflow:ellipsis;/*设置超出内容显示...*/
                         overflow: hidden;/*一定不能少 超出的内容进行隐藏*/"
-                        >{{ recipe.recipe_introduction }}</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">{{ recipe.post_time }}</p>
-                    </td>
-                    <td>
-                        <form action="{{ url_for('user.delete_recipe') }}" method="POST">
-                            <a href="{{ url_for('user.editRecipe') }}?recipe_id={{ recipe.id }}"">
-                                <button type="button" type="button" class="btn btn-warning ">
-                                    <i class="bi-pencil"></i> 编辑
-                                </button>
-                            </a>
-                            <button id="delete-btn" type="submit" class="btn btn-danger ">
-                                <i class="bi-trash"></i> 删除
-                            </button>
-                            <input name="recipe_id" hidden type="text" value="{{ recipe.id }}">
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <!-- 插入分页 -->
-        <nav aria-label="Page navigation ">
-            <ul class="pagination justify-content-center">
-                <li {% if not recipes.has_prev %}class="disabled {% endif %}page-item ">
-                    <a class="page-link"
-                       href="{{ url_for('user.userRecipe') }}?page={{ recipes.prev_num }}">Previous</a>
-                </li>
-                {% for num in range(1,recipes.pages+1) %}
-                    <li {% if num == recipes.page %} class="active {% endif %}page-item "><a class="page-link"
-                                                                                             href="{{ url_for('user.userRecipe') }}?page={{ num }}">{{ num }}</a>
-                    </li>
-                {% endfor %}
-                <li {% if not recipes.has_next %}class="disabled {% endif %}page-item">
-                    <a class="page-link" href="{{ url_for('user.userRecipe') }}?page={{ recipes.next_num }}">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+            >{{ recipe.recipe_introduction }}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{ recipe.post_time }}</p>
+          </td>
+          <td>
+            <form action="{{ url_for('user.delete_recipe') }}" method="POST">
+              <a href="{{ url_for('user.editRecipe') }}?recipe_id={{ recipe.id }}">
+                <button type="button" class="btn btn-warning ">
+                  <i class="bi-pencil"></i> 编辑
+                </button>
+              </a>
+              <button id="delete-btn" type="submit" class="btn btn-danger">
+                <i class="bi-trash"></i> 删除
+              </button>
+              <input name="recipe_id" hidden type="text" value="{{ recipe.id }}">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <!-- 插入分页 -->
+    <nav aria-label="Page navigation ">
+      <ul class="pagination justify-content-center">
+        <li {% if not recipes.has_prev %}class="disabled {% endif %}page-item ">
+          <a class="page-link"
+             href="{{ url_for('user.userRecipe') }}?page={{ recipes.prev_num }}">Previous</a>
+        </li>
+        {% for num in range(1,recipes.pages+1) %}
+          <li {% if num == recipes.page %} class="active {% endif %}page-item "><a class="page-link"
+                                                                                   href="{{ url_for('user.userRecipe') }}?page={{ num }}">{{ num }}</a>
+          </li>
+        {% endfor %}
+        <li {% if not recipes.has_next %}class="disabled {% endif %}page-item">
+          <a class="page-link" href="{{ url_for('user.userRecipe') }}?page={{ recipes.next_num }}">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 {% endblock %}

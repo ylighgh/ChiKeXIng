@@ -18,34 +18,14 @@
 
 前端: 
 
-- 三件套 
-- 组件库 Semantic UI 
+- 三件套 HTML+CSS+JavaScript
+- 组件库 BootStrap
 
 后端:
-- Python
+- Python 3.10
 - Flask(web框架)
-- MySQL
+- MySQL 5.7 
 
-部署: 服务器
+部署: 
+-  Nginx+FastCGI
 
-## 计划
-
-✔
-
-### 04-22
-
-初始化项目 
-
-1. 前端初始化 
-
-    - 初始化项目  ✔
-    - 引入一些组件之类的  ✔
-    - 框架瘦身 ✔
-
-2. 后端初始化  
-
-    - 准备环境（MySQL 之类的）验证 MySQL 是否安装成功 - 连接一下 ✔
-    - 初始化后端项目，引入框架（整合框架）✔
-### 04-24
-1. BootStrap组件使用
-2. GitHub项目提交流程

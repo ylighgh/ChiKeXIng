@@ -1,65 +1,75 @@
 {% extends "base.html" %}
 
 {% block title %}
-    吃客行--登陆
+  吃客行--登陆
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/mdb.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/mdb.min.css') }}">
+  <style>
+      /* Set a background image by replacing the URL below */
+      body {
+          background: url({{ url_for('static',filename="images/bg/1.webp") }}) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          background-size: cover;
+          -o-background-size: cover;
+      }
+  </style>
 {% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+      </div>
+      <div class="col rounded-2" style="background-color: #ffffff;height: 350px;">
+        <form action="{{ url_for("ckx.login") }}" method="POST">
+          <!-- Email input -->
+          <div class="form-outline  form-group mt-5">
+            <input name="email" type="email" id="exampleInputEmail1" class="form-control"/>
+            <label class="form-label" for="form2Example1">邮箱地址</label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline  form-group mt-4">
+            <input name="password" type="password" id="exampleInputPassword1" class="form-control"/>
+            <label class="form-label" for="form2Example2">密码</label>
+          </div>
+          {% for message in get_flashed_messages() %}
+            <div class="form-group ">
+              <div class="text-danger">{{ message }}</div>
             </div>
-            <div class="col">
-                <form action="{{ url_for("ckx.login") }}" method="POST">
-                    <!-- Email input -->
-                    <div class="form-outline  form-group mt-5">
-                        <input name="email" type="email" id="exampleInputEmail1" class="form-control"/>
-                        <label class="form-label" for="form2Example1">邮箱地址</label>
-                    </div>
-
-                    <!-- Password input -->
-                    <div class="form-outline  form-group mt-4">
-                        <input name="password" type="password" id="exampleInputPassword1" class="form-control"/>
-                        <label class="form-label" for="form2Example2">密码</label>
-                    </div>
-                    {% for message in get_flashed_messages() %}
-                        <div class="form-group ">
-                            <div class="text-danger">{{ message }}</div>
-                        </div>
-                    {% endfor %}
-                    <!-- 2 column grid layout for inline styling -->
-                    <div class="row mt-4">
-                        <div class="col d-flex justify-content-center">
-                            <!-- Checkbox -->
-                            <div class="form-group">
-                                <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked/>
-                                <label class="form-check-label" for="form2Example31"> 记住密码 </label>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <!-- Simple link -->
-                            <a href="#!">忘记密码?</a>
-                        </div>
-                    </div>
-
-                    <!-- Submit button -->
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block mt-4">登陆</button>
-                    </div>
-                    <!-- Register buttons -->
-                    <div class="text-center mt-4">
-                        <p>还没有帐号? <a href="{{ url_for("ckx.register") }}">点我注册吧</a></p>
-                    </div>
-                </form>
+          {% endfor %}
+          <!-- 2 column grid layout for inline styling -->
+          <div class="row mt-4">
+            <div class="col d-flex justify-content-center">
+              <!-- Checkbox -->
+              <div class="form-group">
+                <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked/>
+                <label class="form-check-label" for="form2Example31"> 记住密码 </label>
+              </div>
             </div>
-        </div>
 
+            <div class="col">
+              <!-- Simple link -->
+              <a href="#!">忘记密码?</a>
+            </div>
+          </div>
+
+          <!-- Submit button -->
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block mt-4">登陆</button>
+          </div>
+          <!-- Register buttons -->
+          <div class="text-center mt-4">
+            <p>还没有帐号? <a href="{{ url_for("ckx.register") }}">点我注册吧</a></p>
+          </div>
+        </form>
+      </div>
     </div>
+
+  </div>
 
 {% endblock %}

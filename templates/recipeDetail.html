@@ -1,81 +1,82 @@
 {% extends "base.html" %}
 
 {% block title %}
-    吃客行--详情
+  吃客行--详情
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/detail.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/mdb.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/detail.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/mdb.min.css') }}">
 {% endblock %}
 
 {% block body %}
-    <div class="container ">
-        <div class="row ">
-            <div class="col-1"></div>
-            {% for recipe in recipes %}
-                <div class="col" style="margin-top: 50px">
-                    <div>
-                        <h2 class="card-title" style="font-weight: bold">{{ recipe.recipe_name }}</h2>
-                        <p>
-                            <span style="margin-right: 20px">作者：{{ recipe.author.username }}</span>
-                            <span>时间：{{ recipe.post_time }}</span>
-                        </p>
-                    </div>
-                    <div class="picture mb-5">
-                        <img class="rounded" src="{{ url_for('static',filename=recipe.avatar) }}" height="400px"
-                             width="600px">
-                    </div>
+  <div class="container ">
+    <div class="row ">
+      <div class="col-1"></div>
+      {% for recipe in recipes %}
+        <div class="col" style="margin-top: 50px">
+          <div>
+            <h2 class="card-title" style="font-weight: bold">{{ recipe.recipe_name }}</h2>
+            <p>
+              <span style="margin-right: 20px">作者：{{ recipe.author.username }}</span>
+              <span>时间：{{ recipe.post_time }}</span>
+            </p>
+          </div>
+          <div class="picture mb-5">
+            <img class="rounded" src="{{ url_for('static',filename=recipe.avatar) }}" height="400px"
+                 width="600px">
+          </div>
 
-                    <div>
-                        <h5 class="card-title mb-4 " style="font-weight: bold">简介</h5>
-                        <p>{{ recipe.recipe_introduction }}</p>
-                    </div>
+          <div>
+            <h5 class="card-title mb-4 " style="font-weight: bold">简介</h5>
+            <p>{{ recipe.recipe_introduction }}</p>
+          </div>
 
-                    <div>
-                        <h5 class="card-title mb-4 " style="font-weight: bold">做法</h5>
-                        <p>{{ recipe.recipe_steps }}</p>
-                    </div>
-                    <div class="discuss mt-5 mb-3">
-                        <form action="{{ url_for('ckx.comment',recipe_id=recipe.id) }}" method="post">
-                            <div class="form-group">
-                                <h4 class="card-title mt-4 ">评论（{{ count }}）：</h4>
-                                <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                          placeholder="请填写评论"></textarea>
-                            </div>
-                            <div class="mt-3">
-                                <button type="submit" class="btn btn-primary ">发表
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    {% for message in get_flashed_messages() %}
-                        <div class="form-group">
-                            <div class="text-danger">{{ message }}</div>
-                        </div>
-                    {% endfor %}
-                    <ul class="comment-group">
-                        {% for comment in comments %}
-                            <li>
-                                <div class="user-info">
-                                    <img class="avatar" src="
+          <div>
+            <h5 class="card-title mb-4 " style="font-weight: bold">做法</h5>
+            <p>{{ recipe.recipe_steps }}</p>
+          </div>
+          <div class="discuss mt-5 mb-3">
+            <form action="{{ url_for('ckx.comment',recipe_id=recipe.id) }}" method="post">
+              <div class="form-group">
+                <h4 class="card-title mt-4 ">评论（{{ count }}）：</h4>
+                <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"
+                          placeholder="请填写评论"></textarea>
+              </div>
+              <div class="mt-3">
+                <button type="submit" class="btn btn-primary ">发表
+                </button>
+              </div>
+            </form>
+          </div>
+          {% for message in get_flashed_messages() %}
+            <div class="form-group">
+              <div class="text-danger">{{ message }}</div>
+            </div>
+          {% endfor %}
+          <ul class="comment-group">
+            {% for comment in comments %}
+              <li>
+                <div class="user-info">
+                  <img class="avatar" src="
 
-                                            {% if not comment.author.avatar %}{{ url_for("static",filename="images/upload/avatar/default.png") }}{% else %}{{ url_for('static',filename=comment.author.avatar) }} {% endif %}">
-                                    <span class="username">{{ comment.author.username }}</span>
-                                    <span class="create-time">{{ comment.create_time }}</span>
-                                </div>
-                                <p class="comment-content">{{ comment.content }}</p>
-                            </li>
-                        {% endfor %}
-                    </ul>
+
+                          {% if not comment.author.avatar %}{{ url_for("static",filename="images/upload/avatar/default.png") }}{% else %}{{ url_for('static',filename=comment.author.avatar) }} {% endif %}">
+                  <span class="username">{{ comment.author.username }}</span>
+                  <span class="create-time">{{ comment.create_time }}</span>
                 </div>
-                <div class="col">
-                    <div class="picture " style="margin-top: 100px">
-                        <img src="{{ url_for('static',filename="images/bg/recipeDetail_7.png") }}">
-                    </div>
-                </div>
+                <p class="comment-content">{{ comment.content }}</p>
+              </li>
             {% endfor %}
+          </ul>
         </div>
+        <div class="col">
+          <div class="picture " style="margin-top: 100px">
+            <img src="{{ url_for('static',filename="images/bg/recipeDetail_7.png") }}">
+          </div>
+        </div>
+      {% endfor %}
     </div>
+  </div>
 {% endblock %}
 

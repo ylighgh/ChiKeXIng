@@ -1,92 +1,93 @@
 {% extends "base.html" %}
 
 {% block title %}
-    吃客行--探索
+  吃客行--探索
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/mdb.min.css') }}">
-    <style>
-        a {
-            text-decoration: none;
-        }
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/mdb.min.css') }}">
+  <style>
+      a {
+          text-decoration: none;
+      }
 
-        /*单行文本隐藏*/
-        .container p {
+      /*单行文本隐藏*/
+      .container p {
 
-            width: 320px;
-            height: 25px;
-            /*word-break:break-all;*/
-            white-space: nowrap; /*强制在一行显示*/
-            text-overflow: ellipsis; /*设置超出内容显示...*/
-            overflow: hidden; /*一定不能少 超出的内容进行隐藏*/
-        }
-    </style>
+          width: 320px;
+          height: 25px;
+          /*word-break:break-all;*/
+          white-space: nowrap; /*强制在一行显示*/
+          text-overflow: ellipsis; /*设置超出内容显示...*/
+          overflow: hidden; /*一定不能少 超出的内容进行隐藏*/
+      }
+  </style>
 
 {% endblock %}
 
 {% block body %}
 
-    <div class="container">
-        <div class="container col-md-6 col-md-offset-3 mt-3">
-            <form action="{{ url_for('ckx.search') }}" method="GET">
-                <div class="input-group">
-                    <input name="q" class="form-control" type="search" placeholder="请输入菜名、食材名" aria-label="Search">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-success">
-                            搜索
-                        </button>
-                    </div>
-                </div>
-            </form>
+  <div class="container">
+    <div class="container col-md-6 col-md-offset-3 mt-3">
+      <form action="{{ url_for('ckx.search') }}" method="GET">
+        <div class="input-group">
+          <input name="q" class="form-control" type="search" placeholder="请输入菜名、食材名" aria-label="Search">
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-success">
+              搜索
+            </button>
+          </div>
         </div>
+      </form>
+    </div>
 
-        <div class="album py-5 bg-light mt-2">
-            <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    {% for recipe in recipes.items %}
-                        <div class="col">
-                            <a href="{{ url_for('ckx.recipeDetail') }}?recipe_id={{ recipe.id }}"
-                               style="text-decoration: none;color: #050702">
-                                <div class="card shadow-sm">
-                                    <img src="
+    <div class="album py-5 bg-light mt-2">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {% for recipe in recipes.items %}
+            <div class="col">
+              <a href="{{ url_for('ckx.recipeDetail') }}?recipe_id={{ recipe.id }}"
+                 style="text-decoration: none;color: #050702">
+                <div class="card shadow-sm">
+                  <img src="
 
-                                            {% if not recipe.avatar %}{{ url_for("static",filename="images/upload/recipe/default.png") }}{% else %}{{ url_for("static",filename=recipe.avatar) }}{% endif %}"
-                                         class="
+
+                          {% if not recipe.avatar %}{{ url_for("static",filename="images/upload/recipe/default.png") }}{% else %}{{ url_for("static",filename=recipe.avatar) }}{% endif %}"
+                       class="
                                  img-rounded" height="250"
-                                         style="border-radius: 10px;">
-                                    <div class="card-body">
-                                        <p class="card-text"><b>{{ recipe.recipe_name }}</b></p>
-                                        <p class="card-text">{{ recipe.recipe_introduction }}</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <small class="text-muted">{{ recipe.post_time }}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
+                       style="border-radius: 10px;">
+                  <div class="card-body">
+                    <p class="card-text"><b>{{ recipe.recipe_name }}</b></p>
+                    <p class="card-text">{{ recipe.recipe_introduction }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">{{ recipe.post_time }}</small>
+                    </div>
+                  </div>
                 </div>
+              </a>
             </div>
+          {% endfor %}
         </div>
-        <!-- 插入分页 -->
+      </div>
+    </div>
+    <!-- 插入分页 -->
 
-    </div>
-    <div class="container mt-3">
-        <ul class="pagination justify-content-center">
-            <li {% if not recipes.has_prev %}class="disabled {% endif %}page-item ">
-                <a class="page-link"
-                   href="{{ url_for('ckx.explore') }}?page={{ recipes.prev_num }}">Previous</a>
-            </li>
-            {% for num in range(1,recipes.pages+1) %}
-                <li {% if num == recipes.page %} class="active {% endif %}page-item "><a class="page-link"
-                                                                                         href="{{ url_for('ckx.explore') }}?page={{ num }}">{{ num }}</a>
-                </li>
-            {% endfor %}
-            <li {% if not recipes.has_next %}class="disabled {% endif %}page-item">
-                <a class="page-link" href="{{ url_for('ckx.explore') }}?page={{ recipes.next_num }}">Next</a>
-            </li>
-        </ul>
-    </div>
+  </div>
+  <div class="container mt-3">
+    <ul class="pagination justify-content-center">
+      <li {% if not recipes.has_prev %}class="disabled {% endif %}page-item ">
+        <a class="page-link"
+           href="{{ url_for('ckx.explore') }}?page={{ recipes.prev_num }}">Previous</a>
+      </li>
+      {% for num in range(1,recipes.pages+1) %}
+        <li {% if num == recipes.page %} class="active {% endif %}page-item "><a class="page-link"
+                                                                                 href="{{ url_for('ckx.explore') }}?page={{ num }}">{{ num }}</a>
+        </li>
+      {% endfor %}
+      <li {% if not recipes.has_next %}class="disabled {% endif %}page-item">
+        <a class="page-link" href="{{ url_for('ckx.explore') }}?page={{ recipes.next_num }}">Next</a>
+      </li>
+    </ul>
+  </div>
 
 {% endblock %}
