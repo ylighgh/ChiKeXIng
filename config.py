@@ -1,7 +1,7 @@
 # 数据库的配置变量
 import os
 
-HOSTNAME = '39.99.62.76'
+HOSTNAME = '127.0.0.1'
 PORT = '3306'
 DATABASE = 'chikexing'
 USERNAME = 'root'
