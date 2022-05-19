@@ -6,7 +6,7 @@ from sqlalchemy import or_
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import EmailCaptchaModel, UserModel, RecipeModel
 from decorators import login_required
-from .forms import UserInfoFrom, UserSettingForm, PostRecipeForm, DeleteRecipeForm, UserAvatarForm
+from .forms import UserInfoFrom, UserSettingForm, PostRecipeForm, DeleteRecipeForm, UserAvatarForm, EditRecipeForm
 import string
 import random
 from exts import db, mail
@@ -51,25 +51,7 @@ def postRecipe():
             return redirect(url_for("user.postRecipe"))
 
 
-"""
-    form = UserAvatarForm(request.files)
-
-    avatar = request.files.get('avatar')
-    # 保存到本地文件夹
-    avatar_url = os.path.join(UPLOAD_DIR+'avatar', avatar.filename)
-    print(avatar_url)
-    avatar.save(avatar_url)
-    # 保存到数据库
-    user_id = session.get("user_id")
-    USER = UserModel.query.filter(UserModel.id == user_id).first()
-    USER.avatar = '/images/upload/avatar/' + avatar.filename
-    db.session.commit()
-
-    print(USER.avatar)
-"""
-
-
-@bp.route('/userRecipe/')
+@bp.route('/userRecipe')
 @login_required
 def userRecipe():
     page = request.args.get('page', type=int, default=1)
@@ -107,6 +89,7 @@ def userInfo():
             # 获取当前用户的id值
             user_id = session.get("user_id")
             USER = UserModel.query.filter(UserModel.id == user_id).first()
+            print(USER)
             USER.username = form.username.data
             USER.phone = form.phone.data
             USER.address = form.address.data
@@ -200,3 +183,28 @@ def avatarUpload():
 
     print(USER.avatar)
     return render_template("userInfo.html")
+
+
+@bp.route('/editRecipe', methods=['GET', 'POST'])
+@login_required
+def editRecipe():
+    if request.method == 'GET':
+        recipe_id = request.args.get('recipe_id', type=int, default=1)
+        recipes = RecipeModel.query.filter(RecipeModel.id == recipe_id)
+        return render_template("editRecipe.html", recipes=recipes)
+    else:
+        form = EditRecipeForm(request.form, request.files)
+        if form.validate():
+            RECIPE = RecipeModel.query.filter(RecipeModel.id == form.recipe_id.data).first()
+            RECIPE.recipe_name = form.recipe_name.data
+            RECIPE.recipe_introduction = form.recipe_introduction.data
+            RECIPE.recipe_steps = form.recipe_steps.data
+            avatar = request.files.get('avatar')
+            # 保存到本地文件夹
+            avatar_url = os.path.join(UPLOAD_DIR + 'recipe', avatar.filename)
+            avatar.save(avatar_url)
+            # 保存到数据库
+            RECIPE.avatar = '/images/upload/recipe/' + avatar.filename
+            db.session.commit()
+            flash("修改成功")
+            return redirect(url_for("user.userRecipe"))

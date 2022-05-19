@@ -21,17 +21,29 @@ class UserModel(db.Model):
     address = db.Column(db.String(100), nullable=True)
     signature = db.Column(db.String(100), nullable=True)
     introduction = db.Column(db.String(100), nullable=True)
-    avatar = db.Column(db.String(200),nullable=True)
+    avatar = db.Column(db.String(200), nullable=True)
 
 
 class RecipeModel(db.Model):
     __tablename__ = "recipe"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    recipe_name = db.Column(db.String(200), nullable=False)
-    recipe_introduction = db.Column(db.String(200), nullable=False)
+    recipe_name = db.Column(db.String(200), nullable=True)
+    recipe_introduction = db.Column(db.String(200), nullable=True)
     recipe_steps = db.Column(db.String(200), nullable=True)
     post_time = db.Column(db.DateTime, default=datetime.now)
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    avatar = db.Column(db.String(200),nullable=True)
+    avatar = db.Column(db.String(200), nullable=True)
 
     author = db.relationship("UserModel", backref="recipe")
+
+
+class CommentModel(db.Model):
+    __tablename__ = "comment"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    content = db.Column(db.Text, nullable=False)
+    create_time = db.Column(db.DateTime, default=datetime.now)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
+    author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+    recipe = db.relationship("RecipeModel", backref=db.backref("comments", order_by=create_time.desc()))
+    author = db.relationship("UserModel", backref="comments")
