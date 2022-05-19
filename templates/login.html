@@ -4,6 +4,10 @@
     吃客行--登陆
 {% endblock %}
 
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/mdb.min.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="container mt-5">
         <div class="row">

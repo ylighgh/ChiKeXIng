@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/mdb.min.css') }}">
     <style>
         a {
             text-decoration: none;
@@ -13,7 +14,7 @@
         /*单行文本隐藏*/
         .container p {
 
-            width: 350px;
+            width: 320px;
             height: 25px;
             /*word-break:break-all;*/
             white-space: nowrap; /*强制在一行显示*/
@@ -21,6 +22,7 @@
             overflow: hidden; /*一定不能少 超出的内容进行隐藏*/
         }
     </style>
+
 {% endblock %}
 
 {% block body %}
@@ -31,7 +33,7 @@
                 <div class="input-group">
                     <input name="q" class="form-control" type="search" placeholder="请输入菜名、食材名" aria-label="Search">
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-success ">
+                        <button type="submit" class="btn btn-success">
                             搜索
                         </button>
                     </div>
@@ -39,7 +41,7 @@
             </form>
         </div>
 
-        <div class="album py-5 bg-light">
+        <div class="album py-5 bg-light mt-2">
             <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     {% for recipe in recipes.items %}
