@@ -1,9 +1,18 @@
-# 吃客行网站重构
+# 吃客行网站模仿
+
+Web期末作业
 
 ## 使用
 
-`pip install -r requirements.txt  -i https://mirrors.aliyun.com/pypi/simple/`
+安装依赖:`pip install -r requirements.txt  -i https://mirrors.aliyun.com/pypi/simple/`
 
+运行：
+1. `export FLASK_APP=app.py`
+2. `flask run --host=0.0.0.0`
+
+后台运行: `nohup flask run --host=0.0.0.0 > myweb.log 2>&1 &`
+
+访问:`http://localhost:5000`
 
 ## 需求分析
 
@@ -28,4 +37,3 @@
 
 部署: 
 -  Nginx+FastCGI
-
